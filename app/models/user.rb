@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_one_attached :profile_picture
+  has_one_attached :cover_picture
   attr_writer :login
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
