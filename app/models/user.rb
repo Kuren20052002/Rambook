@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :gender, inclusion: { in: [ "boy", "girl" ], message: "%{value} is not a valid gender" }
 
   def login
     @login || self.username || self.email
