@@ -1,3 +1,5 @@
+require "open-uri"
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -6,6 +8,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
   has_one_attached :cover_picture
+  after_create :get_default_profile_picture
   attr_writer :login
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
@@ -25,6 +28,24 @@ class User < ApplicationRecord
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       conditions[:email].downcase! if conditions[:email]
       where(conditions.to_h).first
+    end
+  end
+
+  private
+
+  def get_default_profile_picture
+    url = "https://avatar.iran.liara.run/public/#{self.gender}?username=#{self.first_name}+#{self.last_name}"
+
+    begin
+      profile_picture = URI.open(url)
+      self.profile_picture.attach(io: profile_picture, filename: "#{self.username}_profile_pic.jpg")
+    rescue
+      Rails.logger.error("Error fetching profile picture")
+      Rails.logger.error("Using default picture")
+
+      default_picture_path = Rails.root.join("app", "assets", "images", "default_profile_picture.png")
+      default_picture = File.open(default_picture_path)
+      self.profile_picture.attach(io: default_picture, filename: "default_profile_pic.png")
     end
   end
 end
