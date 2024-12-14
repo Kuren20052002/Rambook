@@ -10,28 +10,35 @@ This project is part of the [Ruby on Rails Final Project](https://www.theodinpro
 
 These features have been implemented and are available in the current version:
 
-*This section will be updated as features are added.*
+#### Posts
+- **Create Posts**: Users will be able to create posts through a user-friendly dashboard.
+- **Edit and Delete Posts**: Posts can be edited or deleted after creation.
+- **Image Support**: Posts will allow images to be attached.
+
+#### Users
+- **Profile Picture**: Users can upload a profile picture.
+- **Cover Photo**: Users can upload a cover photo.
+- **API Integration**: The Avatar Placeholder API will be used to fetch a default profile picture after registration.
+
+
 
 ---
 
 ### To Be Added
 
 These features are planned and will be added as development progresses:
-
 #### Posts
-- **Create Posts**: Users will be able to create posts through a user-friendly dashboard.
-- **Edit and Delete Posts**: Posts can be edited or deleted after creation.
 - **Rich Text Support**: Posts will support rich text formatting (bold, italics, lists, etc.).
-- **Media Support**: Posts will allow images and videos to be attached.
+- **Video Support**: Posts will allow videos to be attached.
 - **Display Comments**: Users will be able to comment on posts, fostering conversation.
 - **Visibility Options**: Posts will have visibility settings (e.g., public, private).
 - **Polls**: Users will be able to create polls with questions and answers for followers to vote on.
 
 #### Users
 - **OAuth Authentication**: Users will be able to log in using popular OAuth providers (e.g., Google, Facebook).
-- **Username Login**: Users will be able to log in using a unique username.
-- **Profile Customization**: Users will be able to set a bio, profile picture, and cover photo.
-- **Gravatar Integration**: The Gravatar API will be used to fetch a default profile picture for users without one.
+- **Make Friends**: Users can send, accept or reject friend requests.
+- **Active Friends**: Users can see friends are active or not.
+
 
 #### User-Post Interaction
 - **Like Posts**: Users will be able to like posts, and posts will show the number of likes and who liked them.
