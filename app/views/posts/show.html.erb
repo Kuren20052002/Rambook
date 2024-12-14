@@ -2,7 +2,7 @@
   <h1><%= @post.user.first_name + " " + @post.user.last_name%></h1>
   
   <% if @post.body.present? %>
-    <p><%= @post.body %></p>
+    <p><%= simple_format(@post.body) %></p>
   <% end %>
   
   <% if @post.image.present? %>

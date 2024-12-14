@@ -1,2 +1,29 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div>
+  <h1><%= @post.user.first_name + " " + @post.user.last_name%></h1>
+  
+  <%= form_with model: @post do |f| %>
+    <div>
+      <% if @post.errors.any? %>
+        <h2>There are <%= pluralize(@post.errors.count, "error")%> stopping you!</h2>
+        <% @post.errors.full_messages.each do |msg| %>
+          <div><%= msg %></div>
+        <% end %><br>
+      <% end%>
+    </div>
+    <div class="field">
+      <%= f.label :body %><br />
+      <%= f.text_area :body, autofocus: true %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Save Post" %>
+    </div>
+  <% end %>
+  <%= link_to "Delete Post", post_path(@post), data: { turbo_method: :delete}%>
+</div>
+

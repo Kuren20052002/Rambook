@@ -22,16 +22,31 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      flash[:notice] = "Post edited succesfully"
+      redirect_to root_path
+    else
+      flash.now[:alert] = "Failed to edit post"
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
     @post = Post.find(params[:id])
   end
 
-  def delete
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = "Post deleted succesfully"
+
+    redirect_to root_path
   end
 
   private
