@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
   has_one_attached :cover_picture
+  has_many :posts
   after_create :get_default_profile_picture
   attr_writer :login
 

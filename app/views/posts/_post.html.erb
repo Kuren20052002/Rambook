@@ -1,0 +1,14 @@
+<div>
+  <h3><%= post.user.first_name + " " + post.user.last_name%></h3>
+  
+  <% if post.body.present? %>
+    <p><%= post.body %></p>
+  <% end %>
+  
+  <% if post.image.present? %>
+    <%= image_tag(post.image)%>
+  <% end %>
+
+  <br><%= link_to "Comments", post_path(post)%>
+</div>
+

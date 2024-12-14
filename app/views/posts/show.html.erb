@@ -1,2 +1,12 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div>
+  <h1><%= @post.user.first_name + " " + @post.user.last_name%></h1>
+  
+  <% if @post.body.present? %>
+    <p><%= @post.body %></p>
+  <% end %>
+  
+  <% if @post.image.present? %>
+    <%= image_tag(@post.image)%>
+  <% end %>
+</div>
+
