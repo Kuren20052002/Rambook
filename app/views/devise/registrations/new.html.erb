@@ -24,8 +24,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.select(:gender, options_for_select([['Male', 'boy'], ['Female', 'girl']])) %>
+    <%= f.label :gender %>
+    <%= f.select :gender, options_for_select([['Male', 'boy'], ['Female', 'girl']], selected: 'boy') %>
   </div>
 
   <div class="field">

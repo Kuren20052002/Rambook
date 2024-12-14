@@ -34,13 +34,14 @@ class User < ApplicationRecord
   private
 
   def get_default_profile_picture
-    url = "https://avatar.iran.liara.run/public/#{self.gender}?username=#{self.first_name}+#{self.last_name}"
+    url = "https://avatar.iran.liara.run/public/#{self.gender}?username=#{self.username}"
 
     begin
       profile_picture = URI.open(url)
       self.profile_picture.attach(io: profile_picture, filename: "#{self.username}_profile_pic.jpg")
-    rescue
-      Rails.logger.error("Error fetching profile picture")
+    rescue => e
+      Rails.logger.error("Error fetching profile picture: #{e.message}")
+      Rails.logger.error("Backtrace:\n#{e.backtrace.join("\n")}")
       Rails.logger.error("Using default picture")
 
       default_picture_path = Rails.root.join("app", "assets", "images", "default_profile_picture.png")
