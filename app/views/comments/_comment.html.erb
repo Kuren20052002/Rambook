@@ -1,0 +1,11 @@
+<div>
+  <h5><%= @comment.user.first_name + " " + @comment.user.last_name%></h5>
+  
+  <% if @comment.body.present? %>
+    <p><%= simple_format(@comment.body) %></p>
+  <% end %>
+  
+  <% if @comment.image.present? %>
+    <%= image_tag @post.avatar.variant(resize_to_limit: [150, 150])%>
+  <% end %>
+</div>
