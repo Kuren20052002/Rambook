@@ -1,0 +1,23 @@
+<% if @user.cover_picture.present? %>
+  <%= image_tag @user.cover_picture.variant(resize_to_limit: [1000, 300]) %>
+<% else %>
+  <div class="profile-cover-image" style="background-color: gray; width: 100%s; height: 300px"></div>
+<% end %>
+
+<%= image_tag @user.profile_picture.variant(resize_to_limit: [150, 150]) %>
+
+<h2>
+  <%= @user.first_name + " " + @user.last_name%>
+</h2>
+
+<div>
+  <p><%= @user.bio %></p>
+</div>
+
+<div>
+  <h1><%= @user.last_name + "'s " + "Post".pluralize(@user.posts.count)%></h3>
+  <% @user.posts.each do |post| %>
+    <%= render "posts/post", post: post%>
+    <hr>
+  <% end %>
+</div>

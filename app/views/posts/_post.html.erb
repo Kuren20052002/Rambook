@@ -1,13 +1,17 @@
 <div>
-  <h3><%= post.user.first_name + " " + post.user.last_name%></h3>
+  <a href="<%= user_path(post.user)%>">
+    <h3><%= post.user.first_name + " " + post.user.last_name%></h3>
+  </a>
   
-  <% if post.body.present? %>
-    <p><%= simple_format(post.body) %></p>
-  <% end %>
-  
-  <% if post.image.present? %>
-    <%= image_tag post.image.variant(resize_to_limit: [800, 800]) %>
-  <% end %>
+  <a href="<%= post_path(post) %>">
+    <% if post.body.present? %>
+      <p><%= simple_format(post.body) %></p>
+    <% end %>
+    
+    <% if post.image.present? %>
+      <%= image_tag post.image.variant(resize_to_limit: [800, 800]) %>
+    <% end %>
+  </a>
 
   <br><%= link_to "Comments", post_path(post)%>
   <br><%= link_to "Edit", edit_post_path(post)%>
