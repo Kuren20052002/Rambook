@@ -14,6 +14,12 @@
   <p><%= @user.bio %></p>
 </div>
 
+<% if @user == current_user %>
+  <div>
+    <%= link_to "Edit Account Information", edit_user_registration_path(@user) %>
+  </div>
+<% end %>
+
 <div>
   <h1><%= @user.last_name + "'s " + "Post".pluralize(@user.posts.count)%></h3>
   <% @user.posts.each do |post| %>
