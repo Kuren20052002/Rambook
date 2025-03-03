@@ -1,0 +1,9 @@
+<div>
+  <p><%= pluralize(user.followers.count, "Follower") %></p>
+  
+  <% unless current_user.following?(user)%>
+    <%= button_to "Follow", create_follow_path(user.id), method: :post, data: {turbo_stream: true} %>
+  <% else %>
+    <%= button_to "Unfollow", destroy_follow_path(user.id), method: :delete, data: {turbo_stream: true} %>
+  <% end %>
+</div>

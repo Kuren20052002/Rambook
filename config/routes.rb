@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :follows do
+    member do
+      post :create, as: :create
+      delete :destroy, as: :destroy
+    end
+  end
   root "posts#index"
   resources :posts do
     resources :comments

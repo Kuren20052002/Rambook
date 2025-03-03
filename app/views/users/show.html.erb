@@ -1,7 +1,6 @@
+
 <% if @user.cover_picture.present? %>
-  <%= image_tag @user.cover_picture.variant(resize_to_limit: [1000, 300]) %>
-<% else %>
-  <div class="profile-cover-image" style="background-color: gray; width: 100%s; height: 300px"></div>
+  <%= image_tag @user.cover_picture.variant(resize_to_fill: [1366, 300]), style: "width: 95vw; max-height: 400px; object-fit: cover;" %>
 <% end %>
 
 <%= image_tag @user.profile_picture.variant(resize_to_limit: [150, 150]) %>
@@ -17,6 +16,11 @@
 <% if @user == current_user %>
   <div>
     <%= link_to "Edit Account Information", edit_user_registration_path(@user) %>
+  </div>
+<% elsif current_user != @user %>
+  <%= turbo_stream_from "user_#{@user.id}_follows" %>
+  <div id="follow_button">
+    <%= render 'follows/follow_button', user: @user %>
   </div>
 <% end %>
 

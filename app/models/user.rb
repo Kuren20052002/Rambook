@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_one_attached :cover_picture
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :follower_users, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_users, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followings, through: :following_users, source: :followed, dependent: :destroy
+  has_many :followers, through: :follower_users, source: :follower, dependent: :destroy
   after_create :get_default_profile_picture
   attr_writer :login
 
@@ -32,6 +36,31 @@ class User < ApplicationRecord
       where(conditions.to_h).first
     end
   end
+
+  def following?(user)
+    followings.include?(user)
+  end
+
+  def follow(user)
+    followings << user unless self == user
+  end
+
+  def unfollow(user)
+    followings.delete(user)
+  end
+
+  def follow_count
+    followings.count
+  end
+
+  after_create_commit do
+    broadcast_update_to "user_#{self.user_id}_follows", target: "follows/follow_button"
+  end
+
+  after_destroy_commit do
+    broadcast_update_to "user_#{self.user_id}_follows", target: "follows/follow_button"
+  end
+
 
   private
 
