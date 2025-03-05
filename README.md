@@ -41,8 +41,7 @@ These features are planned and will be added as development progresses:
 
 #### Users
 - **OAuth Authentication**: Users will be able to log in using popular OAuth providers (e.g., Google, Facebook).
-- **Make Friends**: Users can send, accept or reject friend requests.
-- **Active Friends**: Users can see friends are active or not.
+- **Active Following Users**: Users can see which of the users they are following are active or not.
 
 
 #### User-Post Interaction
