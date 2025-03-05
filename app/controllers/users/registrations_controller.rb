@@ -12,7 +12,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def new
   #   super
   # end
+  # GET /resource/sign_up
+  # def new
+  #   super
+  # end
 
+  # POST /resource
+  # def create
+  #   super
+  # end
   # POST /resource
   # def create
   #   super
@@ -22,7 +30,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def edit
   #   super
   # end
+  # GET /resource/edit
+  # def edit
+  #   super
+  # end
 
+  # PUT /resource
+  #  def update
+  #   super
+  #  end
   # PUT /resource
   #  def update
   #   super
@@ -32,7 +48,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+  # DELETE /resource
+  # def destroy
+  #   super
+  # end
 
+  # GET /resource/cancel
+  # Forces the session data which is usually expired after sign
+  # in to be expired now. This is useful if the user wants to
+  # cancel oauth signing in/up in the middle of the process,
+  # removing all OAuth session data.
+  # def cancel
+  #   super
+  # end
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
@@ -49,6 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :email, :first_name, :last_name, :bio, :gender, :profile_picture, :cover_picture ])
   end
 
+  # If you have extra params to permit, append them to the sanitizer.
   # If you have extra params to permit, append them to the sanitizer.
 
   # The path used after sign up.
