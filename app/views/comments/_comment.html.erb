@@ -1,16 +1,27 @@
-<div>
-  <h3><%= comment.user.first_name + " " + comment.user.last_name%></h3>
-  
-  <% if comment.body.present? %>
-    <p><%= simple_format(comment.body) %></p>
-  <% end %>
-  
-  <% if comment.image.attached? %>
-    <%= image_tag comment.image.variant(resize_to_limit: [150, 150]) %>
-  <% end %>
+<% if comment.body.present? || comment.image.attached?%>
+  <div>
+    <h3><%= comment.user.first_name + " " + comment.user.last_name%></h3>
+    
+    <% if comment.body.present? %>
+      <p><%= simple_format(comment.body) %></p>
+    <% end %>
+    
+    <% if comment.image.attached? %>
+      <%= image_tag comment.image.variant(resize_to_limit: [150, 150]) %>
+    <% end %>
 
-  <%= turbo_stream_from "comment_#{comment.id}_heart" %>
-  <div id="heart_button_<%= comment.id %>_comment">
-    <%= render 'hearts/heart_count_and_button', heartable: comment %>
+    <%= turbo_stream_from "comment_#{comment.id}_heart" %>
+    <div id="heart_button_<%= comment.id %>_comment">
+      <%= render 'hearts/heart_count_and_button', heartable: comment %>
+    </div>
+
+    <% if current_user == comment.user && comment.id.present?%>
+      <br><%= link_to "Edit", "#", data: { action: "click->comments#edit", comment_id: comment.id } %>
+      <div id="edit_comment_<%= comment.id %>" style="display: none;">
+        <%= render 'comments/form', comment: comment %>
+      </div>
+      <br><%= link_to "Delete", post_comment_path(comment.post, comment), data: { turbo_method: :delete }%> 
+    <% end %>
+
   </div>
-</div>
+<% end %>

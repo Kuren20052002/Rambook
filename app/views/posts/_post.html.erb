@@ -19,6 +19,9 @@
   </div>
 
   <br><%= link_to "Comments", post_path(post)%>
-  <br><%= link_to "Edit", edit_post_path(post)%>
+  <% if current_user == post.user %>
+    <br><%= link_to "Edit", edit_post_path(post)%>
+    <br><%= link_to "Delete", post_path(post), data: { turbo_method: :delete }%>
+  <% end %>
 </div>
 

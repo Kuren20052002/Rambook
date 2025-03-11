@@ -1,0 +1,29 @@
+<div>
+  <%= form_with model: [comment.post, comment] do |f| %>
+    <div>
+      <% if comment.errors.any? %>
+        <h2>There are <%= pluralize(comment.errors.count, "error") %> stopping you!</h2>
+        <% comment.errors.full_messages.each do |msg| %>
+          <div><%= msg %></div>
+        <% end %><br>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :body %><br />
+      <%= f.text_area :body, autofocus: true %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit comment.new_record? ? "Post" : "Update" %>
+    </div>
+  <% end %>
+</div>
+
+
+
