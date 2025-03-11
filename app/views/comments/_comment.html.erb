@@ -9,4 +9,8 @@
     <%= image_tag comment.image.variant(resize_to_limit: [150, 150]) %>
   <% end %>
 
+  <%= turbo_stream_from "comment_#{comment.id}_heart" %>
+  <div id="heart_button_<%= comment.id %>_comment">
+    <%= render 'hearts/heart_count_and_button', heartable: comment %>
+  </div>
 </div>

@@ -1,0 +1,8 @@
+<div >
+  <% unless Heart.hearted?(current_user, heartable) %>
+    <%= button_to "♡", create_hearts_path(heartable_type: heartable.class.name, heartable_id: heartable.id), method: :post, data: {turbo_stream: true} %>
+  <% else %>
+      <%= button_to "♥", destroy_hearts_path(heartable_type: heartable.class.name, heartable_id: heartable.id), method: :delete, data: {turbo_stream: true} %>
+  <% end %>
+  <span><%= pluralize(heartable.hearts.count, "Heart") %></span>
+</div>

@@ -13,6 +13,11 @@
     <% end %>
   </a>
 
+  <%= turbo_stream_from "post_#{post.id}_heart" %>
+  <div id="heart_button_<%= post.id %>">
+    <%= render 'hearts/heart_count_and_button', heartable: post %>
+  </div>
+
   <br><%= link_to "Comments", post_path(post)%>
   <br><%= link_to "Edit", edit_post_path(post)%>
 </div>

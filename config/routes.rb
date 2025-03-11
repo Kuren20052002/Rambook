@@ -1,19 +1,24 @@
 Rails.application.routes.draw do
-  resources :follows do
-    member do
-      post :create, as: :create
-      delete :destroy, as: :destroy
+  root "posts#index"
+
+  resources :hearts, only: [] do
+    collection do
+      post "create_heart", to: "hearts#create", as: :create
+      delete "destroy_heart", to: "hearts#destroy", as: :destroy
     end
   end
-  root "posts#index"
+
   resources :posts do
     resources :comments
   end
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
+
   resources :users, only: [ :show ]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
